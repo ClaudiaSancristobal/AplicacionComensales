@@ -1,3 +1,5 @@
+///////////////
+
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, TouchableHighlight, Image } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
