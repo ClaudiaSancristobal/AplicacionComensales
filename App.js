@@ -1,4 +1,4 @@
-///////////////Claudia
+
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, TouchableHighlight, Image } from 'react-native';
