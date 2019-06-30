@@ -41,37 +41,43 @@ export default App;
 
 
 
-class Feed extends Component {
+class Cercanos extends Component {
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Feed</Text>
+            <View style={{ flex: 1, backgroundColor: 'yellow', alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Restaurantes mas cercanos</Text>
             </View>
         );
     }
 }
 
-class Settings extends Component {
+class MejorPuntuados extends Component {
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Settings</Text>
+            <View style={{ flex: 1, backgroundColor: 'blue', alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Mejor puntuados</Text>
             </View>
         );
     }
 }
 
 
-class Profile extends Component {
-
+class Filtrar extends Component {
+    render() {
+        return (
+            <View style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Aplicar Filtros de busqueda</Text>
+            </View>
+        );
+    }
 
 }
 
 const DashboardTabNavigator = createBottomTabNavigator(
     {
-        Feed,
-        Profile,
-        Settings
+        Filtrar,
+        MejorPuntuados,
+        Cercanos
     },
     {
         navigationOptions: ({ navigation }) => {
@@ -95,8 +101,11 @@ const DashboardStackNavigator = createStackNavigator(
                         onPress={() => navigation.openDrawer()}
                         name="md-menu"
                         size={30}
+                        
                     />
-                )
+                                
+                ),
+                
             };
         }
     }

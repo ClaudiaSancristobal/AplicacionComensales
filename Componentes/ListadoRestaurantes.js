@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, FlatList, Text } from 'react-native';
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
@@ -22,6 +22,7 @@ class ListadoRestaurantes extends Component {
         //this._getNormalData();
     }
     render() {
+        //console.log(this.state.restaurantes)
         return (
             <View style={styles.container}>
                 <Image
@@ -36,6 +37,19 @@ class ListadoRestaurantes extends Component {
                     source={{ uri: 'https://i.pinimg.com/originals/93/30/ad/9330ad855473ceb63ef7a5f35ec3312b.jpg' }}
                     style={styles.imagen}
                 />
+
+                <View style={styles.listado}>
+                    <Text>Listado Restaurantes</Text>
+                    <FlatList
+                        
+                        data={this.state.restaurantes}
+                        renderItem={
+                            ({ item }) => <Text> {item.nombre} </Text>
+
+                        }
+                    />
+                </View>
+
             </View>
         );
     }
@@ -52,55 +66,74 @@ class ListadoRestaurantes extends Component {
             else console.log('El documento no existe');
 
             console.log('-----------------------------------------------');
-
+By
         })*/
 
-        firestore.collection("Restaurantes").get().then((querySnapshot) => {
+        firestore.collection("Restaurantes").orderBy("calificacion", "desc").get().then((querySnapshot) => {
+            const rest = [];
+
             querySnapshot.forEach((doc) => {
-                console.log(doc.data());
+                console.log(doc.data().nombre);
+                const { nombre, calificacion } = doc.data();
+                rest.push({
+                    key: doc.id,
+                    //doc, // DocumentSnapshot
+                    nombre,
+                    calificacion,
+                });
+
 
             });
-        });
-        //this.setState({ restaurantes : doc.data() });
+            this.setState({
+                restaurantes: rest,
+            });
+            console.log(this.state.restaurantes);
+        })
     }
-        /*_getNormalData = () => {
-    
-            const no
-            rmalDatabseRef = firestore.collection("Usuarios").doc("KarinaFernandez");
-    
-            normalDatabseRef.get().then(doc => {
-    
-                console.log('--------------- Normal Database ---------------');
-    
-                if (doc.exists) console.log(doc.data());
-                else console.log('El documento no existe');
-    
-                console.log('-----------------------------------------------');
-    
-    
-            }).catch(function (error) {
-                console.log("Error getting document:", error);
-            });
-    
-    
-        }*/
 
-    }//class
+    /*_getNormalData = () => {
+ 
+        const no
+        rmalDatabseRef = firestore.collection("Usuarios").doc("KarinaFernandez");
+ 
+        normalDatabseRef.get().then(doc => {
+ 
+            console.log('--------------- Normal Database ---------------');
+ 
+            if (doc.exists) console.log(doc.data());
+            else console.log('El documento no existe');
+ 
+            console.log('-----------------------------------------------');
+ 
+ 
+        }).catch(function (error) {
+            console.log("Error getting document:", error);
+        });
+ 
+ 
+    }*/
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#fff',
-        },
-        imagen: {
+}//class
 
-            justifyContent: 'center',
-            width: '98%',
-            height: '30%',
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    listado: {
+        backgroundColor: 'red',
+        color:'white'
+    },
+   
+    imagen: {
 
-        },
-    });
+        justifyContent: 'center',
+        width: '98%',
+        height: '25%',
 
-    export default ListadoRestaurantes
+    },
+});
+
+export default ListadoRestaurantes
 
 

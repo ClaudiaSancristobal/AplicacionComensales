@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 class MisReservas extends Component {
 
 
-    constructor(props) {
+    /*constructor(props) {
         super(props);
 
         this.state = {
@@ -42,33 +42,16 @@ class MisReservas extends Component {
                     loading: false
                 })
             });
-    }
+    }*/
 
 
     render() {
 
-        if (this.state.loading) {
-            return (
-                <View style={styles.container}>
-                    <Text>Descargando Pokemones</Text>
-                </View>
-
-            )
-
-
-        }
-        alert(this.state.pokemons);
         return (
 
             <View style={styles.container}>
-                <Text>Listado pokemons</Text>
-                <FlatList
-                    data={this.state.pokemons}
-                    renderItem={
-                        ({ item }) => <Text> {item.name} </Text>
-
-                    }
-                />
+                <Text>Listado de Mis Reservas</Text>
+               
             </View>
         );
     }
